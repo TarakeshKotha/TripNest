@@ -5,8 +5,9 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate");
+const MONGO_URL = process.env.MONGO_URI;
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/tripnest";
+//const MONGO_URL = "mongodb://127.0.0.1:27017/tripnest";
 main()
   .then(() => {
     console.log("connected to DB")
@@ -97,6 +98,12 @@ app.delete("/listings/:id", async (req,res) =>{
 
 
 
-app.listen(8080,() => {
-    console.log("server is listening to port 8080");
+//app.listen(8080,() => {
+    //console.log("server is listening to port 8080");
+//});
+
+// Listen on dynamic port for Render
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
